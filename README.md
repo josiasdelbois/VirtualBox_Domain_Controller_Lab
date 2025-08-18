@@ -1,15 +1,12 @@
 
 # VirtualBox Domain Controller Lab Setup
 
-![Antenna Project cover photo](https://github.com/josiasdelbois/Wireless-Signal-Infrastructure-Implementation/blob/main/Assets/Antenna%20Project%20Photo%201.1.png)
+![Antenna Project cover photo](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Blank%20diagram.jpeg)
 
 ## 📘 Introduction
 This project documents the setup of a VirtualBox home lab consisting of Windows Server 2022 and a Windows 11 client machine. The server hosts key network services including Active Directory (AD), Domain Name System (DNS), and Dynamic Host Configuration Protocol (DHCP). The client machine is domain-joined to simulate a small business IT environment.
 
 This lab environment is designed to help practice system administration, domain management, and client/server networking in a safe, isolated environment..
-
-> [!NOTE]
-> This guide is intended for educational purposes. IP addresses, domain names, and configurations are for lab use only.
 
 ## 🎯 Objectives 
 

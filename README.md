@@ -26,11 +26,10 @@ This lab environment is designed to help practice system administration, domain 
 
 ## 🔧 Tools Used
 
-- VirtualBox (virtualization platform) 
-- Windows Server 2022
-- Windows 10 
-- Networking: VirtualBox Internal Network & NAT Adapter
-- Documentation: Markdown, screenshots, diagrams <img src="https://github.com/josiasdelbois/Wireless-Signal-Infrastructure-Implementation/blob/main/Assets/Lucidchart_logo_(September_2021).svg.png" width="124" style="vertical-align:middle;">
+- <img src="https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/VirtualBox%20Logo.png" width="124" style="vertical-align:middle;">
+- <img src="https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Windows%20Server%202022%20Logo.png" width="195" style="vertical-align:middle;">
+- <img src="https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Windows%2010%20Logo.png" width="114" style="vertical-align:middle;">
+- <img src="https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Lucidchart_logo_(September_2021).svg.png" width="124" style="vertical-align:middle;">
 
 ## 🧪 Project Walkthrough
 
@@ -40,9 +39,12 @@ This lab environment is designed to help practice system administration, domain 
 - Create two VMs in VirtualBox: one for the server, one for the client.
 - Configure networking:
     - Server → 2 NICs (NAT for internet access + Internal Network for LAN).
-    - Client → 1 NIC (Internal Network).
+    - Client → 1 NIC (Internal Network)(We will do this later).
 
-📸 Image placement: Screenshot of VirtualBox network adapter settings for both VMs.
+![VM creation](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Screenshots/1%20VM%20Creation%201.png)
+![CD Settings](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Screenshots/2%20Click%20to%20highlight%20the%20DC%20VM.png)
+![VM creation](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Screenshots/3%20Memory%20and%20Processor%20Allocation.png)
+![VM creation](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Screenshots/4%20Network%20Adapters%20Configuration.png)
 
 ✅ Step 2: Windows Server 2022 Installation
 - Install Windows Server 2022.

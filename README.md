@@ -1,17 +1,17 @@
 
 # VirtualBox Domain Controller Lab Setup
 
-![Antenna Project cover photo](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/Blank%20diagram.jpeg)
+![Antenna Project cover photo](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/VirtualBox%20Domain%20Controller%20Lab%20Diagram.png)
 
 ## 📘 Introduction
-This project documents the setup of a VirtualBox home lab consisting of Windows Server 2022 and a Windows 11 client machine. The server hosts key network services including Active Directory (AD), Domain Name System (DNS), and Dynamic Host Configuration Protocol (DHCP). The client machine is domain-joined to simulate a small business IT environment.
+This project documents the setup of a VirtualBox home lab consisting of Windows Server 2022 and a Windows 10 client machine. The server hosts key network services including Active Directory (AD), Remote Access Service / Remote Access Service (RAS / NAS), Domain Name System (DNS), and Dynamic Host Configuration Protocol (DHCP). The client machine is domain-joined to simulate a small business IT environment.
 
 This lab environment is designed to help practice system administration, domain management, and client/server networking in a safe, isolated environment..
 
 ## 🎯 Objectives 
 
 - Deploy Windows Server 2022 as a Domain Controller with AD, DNS, and DHCP
-- Configure a Windows 11 client machine to join the domain
+- Configure a Windows 10 client machine to join the domain
 - Practice managing user accounts, DNS resolution, and automated IP address assignment 
 - Simulate a small-scale enterprise IT infrastructure in VirtualBox
 
@@ -21,14 +21,14 @@ This lab environment is designed to help practice system administration, domain 
 - Active Directory Setup (domain creation, OU structure, user management)
 - DNS Configuration (zone creation, name resolution for clients)
 - DHCP Setup (IP scope creation, lease management)
-- Client Domain Join (Windows 11 integration with domain services)
+- Client Domain Join (Windows 10 integration with domain services)
 - IT Documentation (step-by-step technical writing, screenshots, testing validation)
 
 ## 🔧 Tools Used
 
 - VirtualBox (virtualization platform) 
 - Windows Server 2022
-- Windows 11 
+- Windows 10 
 - Networking: VirtualBox Internal Network & NAT Adapter
 - Documentation: Markdown, screenshots, diagrams <img src="https://github.com/josiasdelbois/Wireless-Signal-Infrastructure-Implementation/blob/main/Assets/Lucidchart_logo_(September_2021).svg.png" width="124" style="vertical-align:middle;">
 
@@ -36,7 +36,7 @@ This lab environment is designed to help practice system administration, domain 
 
 ✅ Step 1: VirtualBox Setup
 
-- Download ISOs for Windows Server 2022 and Windows 11.
+- Download ISOs for Windows Server 2022 and Windows 10.
 - Create two VMs in VirtualBox: one for the server, one for the client.
 - Configure networking:
     - Server → 2 NICs (NAT for internet access + Internal Network for LAN).
@@ -47,13 +47,13 @@ This lab environment is designed to help practice system administration, domain 
 ✅ Step 2: Windows Server 2022 Installation
 - Install Windows Server 2022.
 - Assign static IP (e.g., 192.168.10.10).
-- Rename the server (e.g., LAB-DC01).
+- Rename the server (DC).
 📸 Image placement: Screenshot of static IP configuration in Server Manager.
 
 ✅ Step 3: Active Directory Domain Services (AD DS)
 - Install AD DS role via Server Manager.
 - Promote the server to a Domain Controller.
-- Create new forest/domain (e.g., lab.local).
+- Create new forest/domain (mydomain.com).
 
 📸 Image placement: Screenshot of Server Manager role installation wizard.
 📸 Image placement: Screenshot of “Promote to Domain Controller” wizard.
@@ -75,8 +75,8 @@ This lab environment is designed to help practice system administration, domain 
 
 📸 Image placement: Screenshot of DHCP scope configuration.
 
-✅ Step 6: Windows 11 Client Setup
-- Install Windows 11 VM.
+✅ Step 6: Windows 10 Client Setup
+- Install Windows 10 VM.
 - Configure network adapter to Internal Network.
 - Set to obtain IP automatically → verify it gets DHCP lease.
 - Join domain: lab.local using domain admin credentials.
@@ -85,7 +85,7 @@ This lab environment is designed to help practice system administration, domain 
 📸 Image placement: Screenshot of domain join confirmation.
 
 ✅ Step 7: Testing
-- Log in to Windows 11 using a domain account.
+- Log in to Windows 10 using a domain account.
 - Ping server by hostname and FQDN.
 - Verify DNS name resolution works.
 - Confirm client receives DHCP IP dynamically.
@@ -100,14 +100,14 @@ This lab environment is designed to help practice system administration, domain 
 - AD DS promotion wizard
 - DNS Manager with forward lookup zone
 - DHCP scope settings
-- Windows 11 client domain join process
+- Windows 10 client domain join process
 - Testing validation screenshots
 
 ## 🔑 Key Takeaways
 
-- Successfully deployed a functional AD/DNS/DHCP lab inside VirtualBox.
+- Successfully deployed a functional AD DS, DNS, DHCP, RAS, and NAT lab environment inside VirtualBox..
 - Learned to configure networking for isolated lab environments.
-- Practiced core system administration tasks like creating a domain, setting up DHCP, and managing DNS.
+- Practiced core system administration tasks including creating a domain controller with AD DS, configuring DHCP and DNS, and setting up RAS and NAT for remote access and network connectivity.
 - Demonstrated how a client-server architecture works in practice.
 
 ## 📎 References 

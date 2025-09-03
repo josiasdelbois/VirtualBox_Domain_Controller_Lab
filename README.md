@@ -4,22 +4,22 @@
 ![Antenna Project cover photo](https://github.com/josiasdelbois/VirtualBox_Domain_Controller_Lab/blob/main/Asset/VirtualBox%20Domain%20Controller%20Lab%20Diagram.png)
 
 ## 📘 Introduction
-This project documents the setup of a VirtualBox home lab consisting of Windows Server 2022 and a Windows 10 client machine. The server hosts key network services including Active Directory (AD), Remote Access Service / Remote Access Service (RAS / NAS), Domain Name System (DNS), and Dynamic Host Configuration Protocol (DHCP). The client machine is domain-joined to simulate a small business IT environment.
+This project documents the setup of a VirtualBox home lab consisting of Windows Server 2022 and a Windows 10 client machine. The server hosts key network services including Active Directory (AD), Remote Access Service / Remote Access Service (RAS / NAS), and Dynamic Host Configuration Protocol (DHCP). The client machine is domain-joined to simulate a small business IT environment.
 
 This lab environment is designed to help practice system administration, domain management, and client/server networking in a safe, isolated environment..
 
 ## 🎯 Objectives 
 
-- Deploy Windows Server 2022 as a Domain Controller with AD, DNS, and DHCP
-- Configure a Windows 10 client machine to join the domain
-- Practice managing user accounts, DNS resolution, and automated IP address assignment 
-- Simulate a small-scale enterprise IT infrastructure in VirtualBox
+- Deploy Windows Server 2022 as a Domain Controller with AD, RAS/NAS, and DHCP.
+- Configure a Windows 10 client machine to join the domain.
+- Practice managing user accounts, remote access, network storage, and automated IP address assignment.
+- Simulate a small-scale enterprise IT infrastructure in VirtualBox.
 
 ## 🚀 Skills Learned
 
 - Virtualization & Networking (VirtualBox networking modes, internal networks)
 - Active Directory Setup (domain creation, OU structure, user management)
-- DNS Configuration (zone creation, name resolution for clients)
+- RAS/NAS Configuration (remote access setup, shared storage management)
 - DHCP Setup (IP scope creation, lease management)
 - Client Domain Join (Windows 10 integration with domain services)
 - IT Documentation (step-by-step technical writing, screenshots, testing validation)
@@ -53,7 +53,9 @@ This lab environment is designed to help practice system administration, domain 
    * **Windows Server 2022 Standard (Desktop Experience)** or
    * **Windows Server 2022 Datacenter (Desktop Experience)**
 
-   ⚠️ Be sure to choose **Desktop Experience**, otherwise you’ll only get a command-line interface.
+> [!IMPORTANT]
+> Be sure to choose **Desktop Experience**, otherwise you’ll only get a command-line interface.
+   
 3. Continue through the setup wizard:
 
    * Accept the license terms
@@ -77,10 +79,10 @@ Once you’ve identified the main adapter, rename it:
 6. Right-click the adapter → **Rename** → set it to **INTERNET**.
 7. Rename the other adapter to **Internal**.
 
-📸 Image placement: Screenshot of Server Manager role installation wizard.
-📸 Image placement: Screenshot of “Promote to Domain Controller” wizard.
-
 ✅ Step 3.2: Assigning a Static IP to the Internal Adapter
+
+> [!NOTE]
+> The three private IPv4 ranges are 10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16. Any of these work well in a VM lab since they’re non-routable on the internet and avoid conflicts with public IPs. For this lab, I’m using the 192.168.0.0 – 192.168.255.255 range because it’s simple, familiar, and widely used in home and test environments.
 
 1. Open **Change adapter options** again.
 
@@ -90,7 +92,7 @@ Once you’ve identified the main adapter, rename it:
 
 4. Select **Use the following IP address** and configure:
 
-   * **IP address**: `172.16.0.1`
+   * **IP address**: `192.168.10.1`
    * **Subnet mask**: `255.255.255.0`
    * **Default gateway**: *leave blank*
    * **Preferred DNS server**: `127.0.0.1` (loopback, since this server will run its own DNS)
@@ -102,7 +104,6 @@ Once you’ve identified the main adapter, rename it:
 2. Select **Rename this PC**.
 3. Name it **DC** (*Domain Controller*).
 4. Click **Next**, then **Restart now**.
-📸 Image placement: Screenshot of DNS Manager showing Forward Lookup Zone.
 
 ✅ Step 5: Creating a Domain
 1. Open **Server Manager** → **Add roles and features**.
@@ -124,18 +125,7 @@ After installation:
 12. Continue → **Install**.
 13. The server will restart.
 
-📸 Image placement: Screenshot of DHCP scope configuration
-
-✅ Step 6: Windows 10 Client Setup
-- Install Windows 10 VM.
-- Configure network adapter to Internal Network.
-- Set to obtain IP automatically → verify it gets DHCP lease.
-- Join domain: lab.local using domain admin credentials.
-
-📸 Image placement: Screenshot of client machine showing DHCP IP lease.
-📸 Image placement: Screenshot of domain join confirmation.
-
-✅ Step 7: Installing RAS/NAT on the Domain Controller
+✅ Step 6: Installing RAS/NAT on the Domain Controller
 1. Open **Add roles and features**.
 2. Continue → select your server.
 3. On **Server roles**, select **Remote Access**, then **Next**.
@@ -152,10 +142,7 @@ After installation:
 
 The icon should turn **green** (from red), confirming it’s active.
 
-📸 Image placement: Screenshot of successful login with domain account.
-📸 Image placement: Screenshot of ping and nslookup test results.
-
-✅ Step 8: Setting Up DHCP on the Domain Controller
+✅ Step 7: Setting Up DHCP on the Domain Controller
 1. Open **Add roles and features**.
 2. Click **Next**.
 3. Select your server → **Next**.
@@ -172,14 +159,14 @@ After installation:
 
 9. Configure the IP range:
 
-   * **Start IP**: `172.16.0.100`
-   * **End IP**: `172.16.0.200`
+   * **Start IP**: `192.168.10.100`
+   * **End IP**: `192.168.10.200`
    * **Length**: 24
    * **Subnet mask**: `255.255.255.0`
 
 10. Continue → set **lease duration** → **Next**.
 
-11. Add the **Default Gateway**: `172.16.0.1` → **Add → Next**.
+11. Add the **Default Gateway**: `192.168.10.1` → **Add → Next**.
 
 12. Finish the wizard.
 
@@ -188,7 +175,7 @@ Finally, authorize DHCP:
 13. Right-click the DHCP server → **Authorize**.
 14. Refresh — the icon should change from **red** to **green**.
 
-✅ Step 7:
+✅ Step 8:
 
 ## 📸 Project Images
 
@@ -202,15 +189,14 @@ Finally, authorize DHCP:
 
 ## 🔑 Key Takeaways
 
-- Successfully deployed a functional AD DS, DHC, RAS, and NAT lab environment inside VirtualBox..
+- Successfully deployed a functional AD DS, DHCP, RAS, NAS, and NAT lab environment inside VirtualBox.
 - Learned to configure networking for isolated lab environments.
-- Practiced core system administration tasks including creating a domain controller with AD DS, configuring DHCP and DNS, and setting up RAS and NAT for remote access and network connectivity.
+- Practiced core system administration tasks including creating a domain controller with AD DS, configuring DHCP, and setting up RAS, NAS, and NAT for remote access, storage, and network connectivity.
 - Demonstrated how a client-server architecture works in practice.
 
 ## 📎 References 
 
 [FCC Guidelines on Cellular Boosters](https://www.fcc.gov/wireless/bureau-divisions/mobility-division/signal-boosters/consumer-signal-boosters) 
 
-[weBoost Specs](https://github.com/josiasdelbois/Wireless-Signal-Infrastructure-Implementation/blob/main/Assets/weBoost%20Technical%20Specs.pdf)
 
 [weBoost installation Guide](https://github.com/josiasdelbois/Wireless-Signal-Infrastructure-Implementation/blob/main/Assets/weBoost%20installation%20Guide.pdf)
